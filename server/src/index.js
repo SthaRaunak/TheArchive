@@ -1,5 +1,5 @@
 const express = require('express')
-const Products = require('./models/products')
+const Users = require('./models/users')
 require('dotenv').config()
 const connection = require('./db/connection')
 
@@ -16,10 +16,10 @@ app.use(express.json())
  
 
  
-app.post('/products', (req, res) => {
- Products.create(req.body)
+app.post('/register', (req, res) => {
+ Users.create(req.body)
  res.json({
- msg: "products"
+ msg: "You are successfully Registered"
  })
 })
  
