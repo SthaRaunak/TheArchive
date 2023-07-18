@@ -1,12 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Outfit:wght@300;400&family=Poppins:wght@300;500;600;700&family=Righteous&display=swap');
 *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
-
+body{
+  background-color:#F8F7F5;
+}
+.con{
+  max-width: 1400px;
+  margin: auto;
+}
 .nav{
   height: 200px;
-  background-color: rgb(160, 222, 216);
+  background-color: rgb(214, 214, 214);
   font-size: 100px;
   padding:30px;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.logo{
+  text-align: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.top{
+  margin-top: 30px;
+  border-bottom: 1px solid black;
+}
+.logo h3{
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;;
+  color:rgb(0, 0, 0);
+  padding: 10px;
+  letter-spacing: 2px;
+  padding-right: 70px;
+}
+li{
+  list-style: none;
+}
+.navItems{
+  margin-top: 10px;
+  gap: 45px;
+  font-size: 18px;
+  font-family: poppins;
+}
+.navItems input{
+  border: none;
+  padding: 6px 16px 6px 6px;
+  color: black;
+  font-size: 18px;
+  background-color: #F8F7F5;
+  
+}
+.search{
+  border-bottom: 2px solid black;
+}
+.search FaSearch{
+  border: 1px solid black;
+}
+.banner h1{
+ 
+  font-size: 85px;
+  width: 580px;
+  padding-top: 130px;
+  line-height: 130px;
+  font-family: 'Merriweather', serif;
+  letter-spacing: 2px;
+  color: rgb(35, 35, 35);
+
+}
+.banner p{
+  padding-right: 34px;
+}
+.banner-right{
+  margin-top: 110px;
+  gap: 30px;
+ 
+}
+.book1 ,.book3{ border-radius: 100px 100px 0px 0px ; object-fit:;}
+.banner-right .book2{
+  margin-top: 70px;
+  border-radius: 0px 0px 100px 100px;
+  object-fit: cover;
+}
+.banner-book{
+  text-align: center;
+  font-family: poppins;
+  font-size: 14px;
+}
+.banner-book h3{
+  padding-top: 10px;
+}
+.banner-left a{
+  display: inline-block;
+  margin-top: 30px;
+  font-family: poppins;
+  padding: 14px 40px;
+  color:white;
+  background-color: rgb(56, 56, 56);
+}
+.login{
+  text-decoration: none;
+  color: black;
 }
