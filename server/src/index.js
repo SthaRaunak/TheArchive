@@ -22,14 +22,21 @@ app.post('/register', async(req, res) => {
  msg: "You are successfully Registered"
  })
 })
- 
-app.get('/register', async(req, res) => {
- 
-    res.json({
-    msg: "hello"
-    })
+ app.get('/checkUserExists/:phoneNumber',async(req,res)=>{
+   const data = await Users.findOne({phoneNumber:req.params.phoneNumber});
+   if(data){
+   res.json({
+    msg: "Phone Number already exists"
    })
-    
+ }else[
+    res.json({
+        validPhoneNo: true
+    })
+ ]
+})
+ 
+ 
+
 
 
 app.listen(port,() =>{

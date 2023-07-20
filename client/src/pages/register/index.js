@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from '../../components/Header'
 import Link from 'next/link';
+
 const Register = () => {
     const SignupSchema = Yup.object().shape({
         fullName: Yup.string()
@@ -33,7 +34,7 @@ const Register = () => {
     return(
         <>
         <Header/>
-      <div className='con'> 
+      <div className='con flex'> 
       <div className="appRegister">
         <h2>Create an Account</h2>
         <Formik
@@ -70,7 +71,8 @@ const Register = () => {
        </Formik>
         <p>Already have an account? <Link href="/login">Sign in</Link></p>
       </div>
-      </div>
+    
+      </div> 
   
       </>
     )
