@@ -8,7 +8,7 @@ body{
   background-color:#F8F7F5;
 }
 .con{
-  max-width: 1400px;
+  max-width: 1300px;
   margin: auto;
 }
 .nav{
@@ -63,21 +63,21 @@ li{
 }
 .banner h1{
  
-  font-size: 85px;
-  width: 580px;
+  font-size: 80px;
+  width: 530px;
   padding-top: 130px;
   line-height: 130px;
   font-family: 'Merriweather', serif;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: rgb(35, 35, 35);
 
 }
-.banner p{
-  padding-right: 34px;
+.banner .infoText{
+ width: 500px;
 }
 .banner-right{
   margin-top: 110px;
-  gap: 30px;
+  gap: 15px;
  
 }
 .book1 ,.book3{ border-radius: 100px 100px 0px 0px ; }
@@ -90,6 +90,7 @@ li{
   text-align: center;
   font-family: poppins;
   font-size: 14px;
+  color: rgb(35, 35, 35);
 }
 .banner-book h3{
   padding-top: 10px;
@@ -100,9 +101,41 @@ li{
   font-family: poppins;
   padding: 14px 40px;
   color:white;
-  background-color: rgb(56, 56, 56);
+  background-color: rgb(70, 158, 113);
 }
-.login{
+.link{
   text-decoration: none;
   color: black;
+}
+.appRegister{
+  font-family: poppins;
+
+}
+.form {
+  display: flex;
+  width: 400px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 0px;
+}
+.appRegister{
+ margin: 90px 0px;
+}
+.appRegister h2{
+  font-size: 40px;
+  font-weight: 200;
+}
+.appRegister button{
+  padding: 10px 100px;
+  text-align: ;
+  margin: 10px 74px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  color: white;
+  font-family: poppins;
+border: 0.2px solid black;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #449F74;
 }
