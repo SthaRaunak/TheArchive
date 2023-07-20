@@ -21,17 +21,17 @@ export default function Banner() {
 
         <div className="banner-right flex">
           <div className="banner-book">
-            <Image src={book2} height="410" width="240" className="book1" />
+            <Image src={book2} height="410" width="240" className="book1" alt="book1"/>
             <h3>The Earth Transformed</h3>
             <p>Peter Frankopan</p>
           </div>
           <div className="banner-book">
-            <Image src={book3} height="410" width="245" className="book2" />
+            <Image src={book3} height="410" width="245" className="book2"alt="book2"/>
             <h3>How I Made $2,000,000 in the Stock Market</h3>
             <p>Nicolas Darvas</p>
           </div>
           <div className="banner-book">
-            <Image src={book1} height="410" width="245" className="book3" />
+            <Image src={book1} height="410" width="245" className="book3" alt="book3"/>
             <h3>Mindwandering</h3>
             <p>Moshe Bar</p>
           </div>

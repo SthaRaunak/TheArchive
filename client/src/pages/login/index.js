@@ -52,7 +52,7 @@ export const Login = () => (
         </Form>
       )}
     </Formik>
-    <p>Dont have an account? <Link href="/register">Sign Up</Link></p>
+    <p>Dont have an account? <Link href="/register">Register Now</Link></p>
   </div>
   </div>
   </div>

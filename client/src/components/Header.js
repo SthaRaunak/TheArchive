@@ -11,7 +11,7 @@ export default function Header(){
 <div className='con flex'>
 
   <div className='flex logo '>
-    <Image src={Logo} height="70" width="70" />
+    <Image src={Logo} height="70" width="70" alt="logo"/>
 
    <h3><Link href="/" className='link'>THE ARCHIVE</Link></h3>
   </div>
@@ -23,7 +23,7 @@ export default function Header(){
       <li>About Us</li>
       <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
       <li><FaShoppingCart /></li>
-      <li><Link href="/register" className="link">Sign In</Link></li>
+      <li><Link href="/login" className="link">Sign In</Link></li>
     </ul>
   </div>
 
