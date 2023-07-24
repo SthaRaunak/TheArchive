@@ -22,6 +22,7 @@ app.post('/register', async(req, res) => {
  msg: "You are successfully Registered"
  })
 })
+
  app.get('/checkUserExists/:phoneNumber',async(req,res)=>{
    const data = await Users.findOne({phoneNumber:req.params.phoneNumber});
    if(data){

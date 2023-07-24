@@ -1,23 +1,29 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Button, message } from 'antd';
+import { useRouter } from 'next/navigation'
 import Header from '../../components/Header'
 import Link from 'next/link';
+import Image from "next/image"
+import banner from "../../images/banner.png"
 
 const Register = () => {
+  const router = useRouter()
+  const [msg, contextHolder] = message.useMessage();   
     const SignupSchema = Yup.object().shape({
         fullName: Yup.string()
           .min(2, 'Too Short!')
           .max(50, 'Too Long!')
-          .required('Required'),
+          .required(<div style={{color: "red" , fontSize: "14px"}}>Required</div>),
         password: Yup.string()
         .min(5, 'Password Too Short!')
-        .required('Required'),
+        .required(<div style={{color: "red" , fontSize: "14px"}}>Required</div>),
         confirmPassword: Yup.string()
         .min(5, 'Password Too Short!')
-        .required('Required')
+        .required(<div style={{color: "red" , fontSize: "14px"}}>Required</div>)
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
-        email: Yup.string().email('Invalid email').required('Required'),
+        email: Yup.string().email('Invalid email').required(<div style={{color: "red" , fontSize: "14px"}}>Required</div>),
       });
 
       const handleRegister = async(values) =>{
@@ -27,14 +33,23 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formFields)
       };
-       await fetch('http://localhost:4000/register',requestOptions)
+       const res = await fetch('http://localhost:4000/register',requestOptions)
+       const data = await res.json()
+       if(data){
+        router.push('/')
+        setTimeout(() => {
+          msg.info(data.msg);
+        }, 2000);
+
+       }  
       }
 
 
     return(
-        <>
+        <div>
+        {contextHolder}
         <Header/>
-      <div className='con flex'> 
+      <div className='con flex '> 
       <div className="appRegister">
         <h2>Create an Account</h2>
         <Formik
@@ -71,10 +86,10 @@ const Register = () => {
        </Formik>
         <p>Already have an account? <Link href="/login">Sign in</Link></p>
       </div>
-    
+      <Image src={banner} height="750" width="1060"  alt="book1" objectFit='cover'/>
       </div> 
-  
-      </>
+             
+      </div>
     )
   }
 
