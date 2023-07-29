@@ -5,30 +5,30 @@ import Link from 'next/link';
 import { FaShoppingCart, FaSearch, FaXing } from 'react-icons/fa'
 
 
-export default function Header(){
-   return( <>
-<div className='top'>
-<div className='con flex'>
+export default function Header() {
+  return (<>
+    <div className='top'>
+      <div className='con flex'>
 
-  <div className='flex logo '>
-    <Image src={Logo} height="70" width="70" alt="logo"/>
+        <div className='flex logo '>
+          <Image src={Logo} height="70" width="70" alt="logo" />
 
-   <h3><Link href="/" className='link'>THE ARCHIVE</Link></h3>
-  </div>
-  <div className="logo">
-    <ul className='flex navItems'>
-      <li>Books</li>
-      <li>Categories</li>
-      <li>WishList</li>
-      <li>About Us</li>
-      <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
-      <li><FaShoppingCart /></li>
-      <li><Link href="/login" className="link">Sign In</Link></li>
-    </ul>
-  </div>
+          <h3><Link href="/" className='link'>THE ARCHIVE</Link></h3>
+        </div>
+        <div className="logo">
+          <ul className='flex navItems'>
+            <li>Books</li>
+            <li>Categories</li>
+            <li>WishList</li>
+            <li>About Us</li>
+            <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
+            <li><FaShoppingCart /></li>
+            <li><Link href="/login" className="link">Sign In</Link></li>
+          </ul>
+        </div>
 
-</div>
-</div>
-</>)
+      </div>
+    </div>
+  </>)
 }
 
