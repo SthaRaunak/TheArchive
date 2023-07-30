@@ -19,12 +19,16 @@ const registerUser = async(req,res)=>{
     req.body.password = await bcrypt.hash(req.body.password, saltRounds)
     //step 3 create a jwt token for the user
     const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
-    await Users.create(req.body)
-    res.json({
-        msg: "you are successfully registered",
-        success: true,
-        token
-    })}
+    const data = await Users.create(req.body)
+    if(data){
+        const {password, ...otherFields} = data._doc
+        res.json({
+            msg: "you are successfully registered",
+            success: true,
+            token,
+            userDetails: otherFields
+        })
+    }}
 
 }catch(err){
     console.log(err)

@@ -7,9 +7,11 @@ import Header from '../../components/Header'
 import Link from 'next/link';
 import Image from "next/image"
 import banner from "../../images/banner.png"
-
+import { setUserDetails } from '@/redux/reducerSlice/users';
+import { useDispatch } from 'react-redux';
 const Register = () => {
   const router = useRouter()
+  const dispatch = useDispatch()
   const [msg, contextHolder] = message.useMessage();   
     const SignupSchema = Yup.object().shape({
         fullName: Yup.string()
@@ -36,6 +38,8 @@ const Register = () => {
        const res = await fetch('http://localhost:4000/register',requestOptions)
        const data = await res.json()
        if(data && res.status==200) {
+        debugger;
+        dispatch(setUserDetails(data))
         router.push('/')
         setTimeout(() => {
           msg.info(data.msg);
