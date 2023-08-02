@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image"
 import Logo from "@/images/logoarchive.png"
 import Link from 'next/link';
-import { FaShoppingCart, FaSearch, FaXing } from 'react-icons/fa'
+import { FaShoppingCart, FaSearch, FaXing, FaRegHeart } from 'react-icons/fa'
 
 
 export default function Header() {
@@ -19,9 +19,10 @@ export default function Header() {
           <ul className='flex navItems'>
             <li>Books</li>
             <li>Categories</li>
-            <li>WishList</li>
+
             <li>About Us</li>
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
+            <li><Link href="/wishlist" className='link'><FaRegHeart /></Link></li>
             <li><FaShoppingCart /></li>
             <li><Link href="/login" className="link">Sign In</Link></li>
           </ul>
