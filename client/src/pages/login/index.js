@@ -5,55 +5,75 @@ import Header from '../../components/Header';
 import Link from 'next/link';
 import Image from "next/image"
 import banner from "../../images/banner.png"
-const SignupSchema = Yup.object().shape({
-  userName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required(<div style={{ color: "red", fontSize: "14px" }}>Required</div>),
+import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { setUserDetails } from '@/redux/reducerSlice/users';
+import {Button, message} from 'antd';
 
-  email: Yup.string()
-    .email('Invalid email')
-    .required(<div style={{ color: "red", fontSize: "14px" }}>Required</div>),
-
+const LoginSchema = Yup.object().shape({
+  phoneNumber: Yup.string().required('Required'),
   password: Yup.string()
     .min(3, 'Too Short!')
     .max(30, 'Too Long!')
     .required(<div style={{ color: "red", fontSize: "14px" }}>Required</div>),
 });
 
-export const Login = () => (
-  < >
+const Login = () => {
+
+  const router = useRouter()
+  const [msg, contextHolder] = message.useMessage();
+  const dispatch = useDispatch();
+
+  const handleLogin = async(values) => {
+    try {
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify(values)
+      };
+      const res = await fetch('http://localhost:4000/login',requestOptions)
+      const data = await res.json()
+      if(data && data.success && res.status == 200){
+        dispatch(setUserDetails(data))
+        router.push('/')
+        msg.info(data.msg)
+      }else{
+        msg.info(data.msg);
+      }
+    } catch (err) {
+      msg.info(err)
+    }
+  }
+
+  
+  return (
+  <>
+  {contextHolder}
     <Header />
     <div className="con flex">
       <div className="appRegister ">
         <h2>Welcome Back</h2>
         <Formik
           initialValues={{
-            userName: '',
-            email: '',
+            phoneNumber: '',
             password: '',
-
           }}
-          validationSchema={SignupSchema}
+          validationSchema={LoginSchema}
           onSubmit={values => {
-            // same shape as initial values
-            console.log(values);
+            handleLogin(values);
           }}
         >
           {({ errors, touched }) => (
             <Form>
-              <Field name="userName" placeholder="Username" className="form" />
-              {errors.userName && touched.userName ? (
-                <div>{errors.userName}</div>
-              ) : null}
-              <Field name="email" type="email" placeholder="Email" className="form" />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
+               <Field name="phoneNumber"  placeholder="Phone Number" className="form"/>
+             {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
+            
               <Field name="password" placeholder="Password" className="form" />
               {errors.password && touched.password ? (
                 <div>{errors.password}</div>
               ) : null}
 
-              <button type="submit">Submit</button>
+              <button type="submit">Log in</button>
             </Form>
           )}
         </Formik>
@@ -64,6 +84,7 @@ export const Login = () => (
 
     </div>
   </>
-);
+  )
+};
 
 export default Login
