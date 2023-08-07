@@ -4,17 +4,23 @@ import Logo from "@/images/logoarchive.png"
 import Link from 'next/link';
 import { FaShoppingCart, FaSearch, FaXing, FaRegHeart } from 'react-icons/fa'
 import { Avatar, Space, Popover } from 'antd';
-import { useSelector } from 'react-redux';
-
+import { useSelector , useDispatch } from 'react-redux';
+import {handleLogout} from '../redux/reducerSlice/users'
 
 
 export default function Header() {
   const { isLoggedIn, userDetails } = useSelector(state => state.users);
 
+  const dispatch = useDispatch()
+
+  const userLogout = () =>{
+    dispatch(handleLogout())
+  }
+
   const content = (
     <div>
-      <Link href="/profile"> Profile </Link>
-      <p>Logout</p>
+      <Link href="/account"> My Account </Link>
+      <p onClick={userLogout}>Logout</p>
     </div>
   )
 
@@ -47,6 +53,7 @@ export default function Header() {
                       border: '2px solid black',
                       marginTop: '-7px',
                       cursor: 'pointer',
+                      fontSize: '1.4rem'
                     }}
                   >
                     {userDetails.fullName[0]}
