@@ -40,7 +40,7 @@ export default function Header() {
             <li>About Us</li>
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
             <li><Link href="/wishlist" className='link'><FaRegHeart /></Link></li>
-            <li><FaShoppingCart /></li>
+            <li><Link href="/cart" className='text-black'><FaShoppingCart /></Link></li>
 
             <li>{isLoggedIn ? (
               <div>
