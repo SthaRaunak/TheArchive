@@ -25,17 +25,18 @@ export default function Header() {
   )
 
   return (<>
-    <div className='top'>
+
+    <div className='top bg-[#F9F8F6] '>
       <div className='con flex'>
 
         <div className='flex logo '>
           <Image src={Logo} height="70" width="70" alt="logo" />
-
+          
           <h3><Link href="/" className='link'>THE ARCHIVE</Link></h3>
         </div>
         <div className="logo">
           <ul className='flex navItems'>
-            <li>Books</li>
+            <li><Link href="/books" className='text-black no-underline'>Books</Link></li>
             <li>Categories</li>
             <li>About Us</li>
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>

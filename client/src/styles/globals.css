@@ -8,9 +8,7 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #F8F7F5;
-}
+
 
 .con {
   max-width: 1300px;
@@ -37,7 +35,7 @@ body {
 }
 
 .top {
-  margin-top: 30px;
+  padding-top: 30px;
   border-bottom: 1px solid black;
 }
 

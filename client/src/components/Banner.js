@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 export default function Banner() {
   const { fullName } = useSelector(state => state.users)
   return (<>
+  <div className='bg-[#F9F8F6] pb-20'>
     <div className="con flex banner">
       <div className="banner-left">
         <h1><FaXing />Find Your Next Book</h1>
@@ -37,6 +38,7 @@ export default function Banner() {
           <p>Moshe Bar</p>
         </div>
       </div>
+    </div>
     </div>
   </>);
 }

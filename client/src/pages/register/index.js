@@ -9,6 +9,8 @@ import Image from "next/image"
 import banner from "../../images/banner.png"
 import { setUserDetails } from '@/redux/reducerSlice/users';
 import { useDispatch } from 'react-redux';
+import Footer from '../../components/Footer';
+
 const Register = () => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -94,6 +96,7 @@ const Register = () => {
         </div>
         <Image src={banner} height="750" width="1060" alt="book1" objectFit='cover' />
       </div>
+      <Footer/>
     </div>
   )
 }

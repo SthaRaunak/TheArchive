@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import { setUserDetails } from '@/redux/reducerSlice/users';
 import {Button, message} from 'antd';
-
+import Footer from '../../components/Footer';
 const LoginSchema = Yup.object().shape({
   phoneNumber: Yup.string().required('Required'),
   password: Yup.string()
@@ -83,6 +83,7 @@ const Login = () => {
       <Image src={banner} height="750" width="1060" alt="book1" objectFit='cover' />
 
     </div>
+    <Footer/>
   </>
   )
 };
