@@ -2,6 +2,7 @@
 
 @tailwind components;
 @tailwind utilities;
+
 * {
   margin: 0px;
   padding: 0px;
@@ -189,4 +190,14 @@ li {
 .w-100 {
   border: 10px solid #343434;
   border-radius: 0px 0px 0px 200px;
+}
+
+.card {
+  width: 198px;
+  height: 450px;
+  border-radius: 6px;
+}
+
+.sortMenu {
+  width: 460px;
 }
