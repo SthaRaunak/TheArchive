@@ -1,14 +1,23 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { useState } from 'react';
 
 const Admin = () => {
+    const [file, setFile] = useState(null)
     const handleAddBooks = (values) => {
+        const data = new FormData()
+        
+        Object.entries(values).forEach((item => {
+            data.append(item[0], item[1])
+        }))
+
+        data.append('bookImage', file)
+
         fetch('http://localhost:4000/books',
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
+                body: data
             })
     }
 
@@ -53,7 +62,7 @@ const Admin = () => {
 
                                 <Field placeholder="Book Description" name="bookDescription" type="bookDescription" className="ps-2 pe-14 text-lg py-3 mb-4" />
                                 {errors.bookDescription && touched.bookDescription ? <div>{errors.bookDescription}</div> : null}<br />
-
+                                <input type="file" className=" pe-14 text-lg py-3 mb-4 block" onChange={(e) => setFile(e.target.files[0])} />
                                 <button type="submit" className='py-3 p-28 bg-slate-800 text-white text-lg font-bold'>Submit</button>
                             </div>
 
