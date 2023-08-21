@@ -7,17 +7,17 @@ const multer = require('multer')
 
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb){
+    destination: function (req, file, cb) {
         cb(null, 'uploads/books')
     },
-    filename: function(req, file, cb){
-        cb(null , Math.floor(Math.random()* 10000000) + file.originalname)
+    filename: function (req, file, cb) {
+        cb(null, Math.floor(Math.random() * 10000000) + file.originalname)
     }
 })
 
-const upload = multer({storage: storage})
+const upload = multer({ storage: storage })
 
-router.post('/books',upload.single('bookImage'),BooksController.addNewBook)
+router.post('/books', upload.single('bookImage'), BooksController.addNewBook)
 router.get('/books', BooksController.getAllBooks)
-
+router.get('/books-img/:id', BooksController.getBookImageById)
 module.exports = router;

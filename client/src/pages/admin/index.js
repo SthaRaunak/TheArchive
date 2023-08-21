@@ -2,12 +2,14 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 const Admin = () => {
+    const router = useRouter();
     const [file, setFile] = useState(null)
     const handleAddBooks = (values) => {
         const data = new FormData()
-        
+
         Object.entries(values).forEach((item => {
             data.append(item[0], item[1])
         }))
@@ -35,6 +37,7 @@ const Admin = () => {
                     onSubmit={values => {
                         handleAddBooks(values)
                         console.log(values)
+                        router.push('/books')
                     }}>
 
                     {({ errors, touched }) => (

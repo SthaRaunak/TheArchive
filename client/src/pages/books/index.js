@@ -1,15 +1,12 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import React, { useState, useEffect } from 'react'
-import { setUseProxies } from 'immer'
-import book1 from "../../images/book1.webp";
 import Image from "next/image"
 const Books = () => {
   const [books, setBooks] = useState([])
   const fetchBooks = async () => {
     const res = await fetch('http://localhost:4000/books')
     const { data } = await res.json()
-    console.log(JSON.stringify(data))
     setBooks(data)
   }
   useEffect(() => {
@@ -25,7 +22,8 @@ const Books = () => {
             <div>{books.map((item) => {
               return (<div className='card pb-5 font-["poppins"] shadow ms-4 px-4 py-3 mb-5  inline-flex flex-wrap relative cursor-pointer'>
                 <ul>
-                  <Image src={book1} alt="book" width={166} height={269} />
+                  {/* Book Image */}
+                  <Image src={'http://localhost:4000/books-img/' + item._id} alt="book" width={166} height={269} priority={true} />
                   <li>{item.bookName}</li>
 
                   <li >by <span className="text-gray-600 text-sm">{`${item.author}`}</span></li>

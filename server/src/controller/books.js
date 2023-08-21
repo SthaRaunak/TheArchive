@@ -1,4 +1,6 @@
 //Imports
+const fs = require('fs')
+const path = require('path')
 const Books = require('../models/books')
 //Imports
 
@@ -24,5 +26,17 @@ const getAllBooks = async (req, res) => {
         })
     }
 }
+//Getting Book Image From Server
+const getBookImageById = async (req, res) => {
+    const data = await Books.findById(req.params.id)
+    const imageDir = path.join(__dirname, '../../', 'uploads/books/' + data.bookImage)
+    const defaultDir = path.join(__dirname, '../../', 'uploads/books/' + 'DefaultImg.jpeg')
 
-module.exports = { addNewBook, getAllBooks }
+    if (fs.existsSync(imageDir)) {
+        res.sendFile(imageDir)
+    } else {
+        res.sendFile(defaultDir)
+    }
+}
+
+module.exports = { addNewBook, getAllBooks, getBookImageById }
