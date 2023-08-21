@@ -2,7 +2,11 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import React, { useState, useEffect } from 'react'
 import Image from "next/image"
+import {addToCart} from '../../redux/reducerSlice/books'
+import { useDispatch } from 'react-redux';
+
 const Books = () => {
+  const dispatch = useDispatch()
   const [books, setBooks] = useState([])
   const fetchBooks = async () => {
     const res = await fetch('http://localhost:4000/books')
@@ -16,7 +20,7 @@ const Books = () => {
     <>
       <Header />
       <div className='con pt-20 flex'>
-        <div class="sortMenu"></div>
+        <div className="sortMenu"></div>
         <div>{
           books.length > 0 ? (
             <div>{books.map((item) => {
@@ -28,7 +32,7 @@ const Books = () => {
 
                   <li >by <span className="text-gray-600 text-sm">{`${item.author}`}</span></li>
                   <li className='mb-auto relative'> {`Rs. ${item.bookPrice}`}</li>
-                  <button className='w-10/12 text-base py-1 bg-white border-blue-500 text-blue-500 rounded mt-auto absolute bottom-5'> ADD TO CART</button>
+                  <button className='w-10/12 text-base py-1 bg-white border-blue-500 text-blue-500 rounded mt-auto absolute bottom-5' onClick={()=>dispatch(addToCart(item._id))}> ADD TO CART</button>
                 </ul>
               </div>
 

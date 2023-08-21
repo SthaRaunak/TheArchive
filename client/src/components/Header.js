@@ -3,17 +3,18 @@ import Image from "next/image"
 import Logo from "@/images/logoarchive.png"
 import Link from 'next/link';
 import { FaShoppingCart, FaSearch, FaXing, FaRegHeart } from 'react-icons/fa'
-import { Avatar, Space, Popover } from 'antd';
-import { useSelector , useDispatch } from 'react-redux';
-import {handleLogout} from '../redux/reducerSlice/users'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { Avatar, Space, Popover, Badge } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { handleLogout } from '../redux/reducerSlice/users'
 
 
 export default function Header() {
   const { isLoggedIn, userDetails } = useSelector(state => state.users);
-
+  const { cartList } = useSelector(state => state.books)
   const dispatch = useDispatch()
 
-  const userLogout = () =>{
+  const userLogout = () => {
     dispatch(handleLogout())
   }
 
@@ -28,10 +29,9 @@ export default function Header() {
 
     <div className='top bg-[#F9F8F6] '>
       <div className='con flex'>
-
         <div className='flex logo '>
           <Image src={Logo} height="70" width="70" alt="logo" />
-          
+
           <h3><Link href="/" className='link'>THE ARCHIVE</Link></h3>
         </div>
         <div className="logo">
@@ -40,8 +40,9 @@ export default function Header() {
             <li>Categories</li>
             <li>About Us</li>
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
-            <li><Link href="/wishlist" className='link'><FaRegHeart /></Link></li>
-            <li><Link href="/cart" className='text-black'><FaShoppingCart /></Link></li>
+            <li><Link href="/wishlist" className='link'><FaRegHeart className='text-xl' /></Link></li>
+
+            <li><Link href="/cart" className='text-black'><Badge count={cartList.length}><AiOutlineShoppingCart className='text-[1.4rem]' /></Badge></Link></li>
 
             <li>{isLoggedIn ? (
               <div>
