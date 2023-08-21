@@ -32,7 +32,7 @@ const Books = () => {
 
                   <li >by <span className="text-gray-600 text-sm">{`${item.author}`}</span></li>
                   <li className='mb-auto relative'> {`Rs. ${item.bookPrice}`}</li>
-                  <button className='w-10/12 text-base py-1 bg-white border-blue-500 text-blue-500 rounded mt-auto absolute bottom-5' onClick={()=>dispatch(addToCart(item._id))}> ADD TO CART</button>
+                  <button className='w-10/12 text-base py-1 bg-white border-blue-500 text-blue-500 rounded mt-auto absolute bottom-5 cursor-pointer hover:bg-gray-100' onClick={()=>dispatch(addToCart(item))}> ADD TO CART</button>
                 </ul>
               </div>
 

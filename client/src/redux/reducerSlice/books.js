@@ -10,12 +10,15 @@ const booksSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, actions) {
-                const existingCartState = [...state.cartList]
-                existingCartState.push(actions.payload)
-                return{
-                    ...state,
-                    cartList: existingCartState
-                }
+            debugger;
+            const existingCartState = [...state.cartList]
+            debugger;
+            existingCartState.push(actions.payload)
+            debugger;
+            return {
+                ...state,
+                cartList: existingCartState
+            }
         },
     },
 })
