@@ -1,4 +1,4 @@
-![FYP-the-archive](https://github.com/SthaRaunak/personal-project/assets/134532133/44f21697-fdfb-4a05-9711-209a4d9ef32b)
+![FYP-the-archive](https://github.com/SthaRaunak/TheArchive/assets/134532133/cd28243e-8365-45d4-9996-42e6e3c11698)
 
 
 
@@ -114,7 +114,7 @@ The Archive Ecommerce Book Store Project leverages the following technologies an
 
 1.Clone this GitHub repository to your local machine using:
 ```bash
- 
+ git clone https://github.com/SthaRaunak/TheArchive.git
 ```
 2.Navigate to the project directory:
 ```bash
