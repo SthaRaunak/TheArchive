@@ -6,30 +6,43 @@ import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { list } from 'postcss';
 import { useRouter } from 'next/navigation'
-
+import { FiTrash } from 'react-icons/fi'
+import { removeFromCart } from '@/redux/reducerSlice/books';
 function index() {
 
   const dispatch = useDispatch();
   const { cartList } = useSelector(state => state.books)
+  console.log(cartList)
+  const removeCartItem = (item) => {
+    dispatch(removeFromCart(item._id))
+  }
   return (
     <>
       <Header />
       {cartList.length == 0 ? <EmptyCart /> : (
         <div className='con !mt-[70px] bg-white flex font-["poppins"]'>
           <div className='w-[800px]'>
-            <h2 className='text-[2.8rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart</h2>
+            <h2 className='text-[2.4rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart</h2>
             {cartList.map(item =>
               <div>
-                <div className='flex !justify-start'>
+                <div className='flex'>
                   <Image src={'http://localhost:4000/books-img/' + item._id} alt="book" width={92} height={142} priority={true} className="shadow-xl" />
                   <div className='flex justify-between w-[700px]'>
                     <div>
                       <p className="ps-4 pt-3 text-xl">{item.bookName}</p>
                       <p className='ps-4 text-[16px]'>by <span className='text-gray-600'>{item.author}</span></p>
                     </div>
+                    <div>
                     <p className='pt-5 text-[1.4rem]'>Rs. {item.bookPrice}</p>
+                    <p className='mt-9 text-[1rem] items-center flex cursor-pointer' onClick={()=>{removeCartItem(item)}}><FiTrash/> Remove</p>
+                    <p>{item.quantity}</p>
+                    </div>
                   </div>
+
+                
+         
                 </div>
+                
                 <div className='w-[100%] bg-gray-400 h-[0.1px] my-5 '></div>
               </div>)}
 

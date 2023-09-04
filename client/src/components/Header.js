@@ -24,6 +24,15 @@ export default function Header() {
       <p onClick={userLogout}>Logout</p>
     </div>
   )
+  
+  function cartCounter (cartList) {
+      const cartListQuantity = cartList.map(item => item.quantity)
+      console.log(cartListQuantity)
+     const TotalItemInCart =  cartListQuantity.reduce((accumulator,currentValue) => accumulator+ currentValue,0) 
+     console.log(TotalItemInCart)
+    return TotalItemInCart;
+  }
+  
 
   return (<>
 
@@ -42,7 +51,7 @@ export default function Header() {
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
             <li><Link href="/wishlist" className='link'><FaRegHeart className='text-xl' /></Link></li>
 
-            <li><Link href="/cart" className='text-black'><Badge count={cartList.length}><AiOutlineShoppingCart className='text-[1.4rem]' /></Badge></Link></li>
+            <li><Link href="/cart" className='text-black'><Badge count={cartCounter(cartList)}><AiOutlineShoppingCart className='text-[1.4rem]' /></Badge></Link></li>
 
             <li>{isLoggedIn ? (
               <div>
