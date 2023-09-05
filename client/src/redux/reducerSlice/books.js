@@ -57,12 +57,31 @@ const booksSlice = createSlice({
                 }
             }
             return state;
+        },
+        //Adding item to the Wishlist
+        addToWishlist(state, action) {
+            const itemIndex = state.wishlist.findIndex((item) => item._id == action.payload._id)
+            if (itemIndex == -1) {
+                state.wishlist.push(action.payload)
+            }
+            return state;
+        },
+
+        //Removing item from wishlist
+        removeWishlist(state, action) {
+            debugger;
+            const removeItemId = action.payload._id;
+            const existingWishlistState = [...state.wishlist]
+            const UpdateWishList = existingWishlistState.filter((item) => item._id !== removeItemId)
+            return {
+                ...state,
+                wishlist: UpdateWishList,
+            }
+
         }
-
-
     },
 
 })
 
-export const { addToCart, removeFromCart, IncreaseQuantity, DecrementQuantity } = booksSlice.actions;
+export const { addToCart, removeFromCart, IncreaseQuantity, DecrementQuantity, addToWishlist, removeWishlist } = booksSlice.actions;
 export default booksSlice.reducer;

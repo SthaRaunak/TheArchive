@@ -6,14 +6,17 @@ import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation'
 import { FiTrash } from 'react-icons/fi'
+import { BsBookmarkHeart, BsBookmarkHeartFill } from 'react-icons/bs'
 import { Button, message } from 'antd';
-import { IncreaseQuantity, removeFromCart, DecrementQuantity } from '@/redux/reducerSlice/books';
+import { IncreaseQuantity, removeFromCart, DecrementQuantity, addToWishlist, removeWishlist } from '@/redux/reducerSlice/books';
 
 function Cart() {
   const [msg, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
+
   const { cartList } = useSelector(state => state.books)
-  console.log(cartList)
+  const { wishlist } = useSelector(state => state.books)
+
   const removeCartItem = (item) => {
     msg.info(item.bookName + " has been removed from the Cart");
     dispatch(removeFromCart(item._id))
@@ -24,6 +27,9 @@ function Cart() {
   }
   const DecrementCartItem = (item) => {
     dispatch(DecrementQuantity(item))
+  }
+  const addWishListItem = (item) => {
+    wishlist.some(list => list._id == item._id) ? dispatch(removeWishlist(item)) : dispatch(addToWishlist(item))
   }
   return (
     <>
@@ -49,8 +55,14 @@ function Cart() {
                     </div>
 
                     <div>
-                      <p className='pt-5 text-[1.4rem]'>Rs. {item.bookPrice}</p>
-                      <p className='mt-[54px] text-[1rem] items-center flex cursor-pointer text-gray-600' onClick={() => { removeCartItem(item) }}><FiTrash /> Remove</p>
+                      <div className='flex !justify-end'>
+                        <p className='pt-5 text-[1.4rem]'>Rs. {item.bookPrice}</p>
+                      </div>
+
+                      <div className='flex gap-6'>
+                        <p className='mt-[54px] text-[1.1rem] items-center flex cursor-pointer text-gray-700 gap-1' onClick={() => { removeCartItem(item) }}><FiTrash /> Remove</p>
+                        <p className='mt-[54px] text-[1.1rem] items-center flex cursor-pointer text-gray-700 gap-1' onClick={() => { addWishListItem(item) }}> {wishlist.some(list => list._id == item._id) ? <><BsBookmarkHeartFill />Remove from wishlist</> : <><BsBookmarkHeart /> Add to wishlist</>}</p>
+                      </div>
 
                     </div>
                   </div>

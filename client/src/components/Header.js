@@ -12,6 +12,7 @@ import { handleLogout } from '../redux/reducerSlice/users'
 export default function Header() {
   const { isLoggedIn, userDetails } = useSelector(state => state.users);
   const { cartList } = useSelector(state => state.books)
+  const { wishlist } = useSelector(state => state.books)
   const dispatch = useDispatch()
 
   const userLogout = () => {
@@ -24,15 +25,15 @@ export default function Header() {
       <p onClick={userLogout}>Logout</p>
     </div>
   )
-  
-  function cartCounter (cartList) {
-      const cartListQuantity = cartList.map(item => item.quantity)
-      console.log(cartListQuantity)
-     const TotalItemInCart =  cartListQuantity.reduce((accumulator,currentValue) => accumulator+ currentValue,0) 
-     console.log(TotalItemInCart)
+
+  function cartCounter(cartList) {
+    const cartListQuantity = cartList.map(item => item.quantity)
+    console.log(cartListQuantity)
+    const TotalItemInCart = cartListQuantity.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+    console.log(TotalItemInCart)
     return TotalItemInCart;
   }
-  
+
 
   return (<>
 
@@ -49,7 +50,7 @@ export default function Header() {
             <li>Categories</li>
             <li>About Us</li>
             <li><div className='search'><FaSearch /><input type="text" placeholder='Search book...' /></div></li>
-            <li><Link href="/wishlist" className='link'><FaRegHeart className='text-xl' /></Link></li>
+            <li><Link href="/wishlist" className='link'><Badge count={wishlist.length}><FaRegHeart className='text-xl' /></Badge></Link></li>
 
             <li><Link href="/cart" className='text-black'><Badge count={cartCounter(cartList)}><AiOutlineShoppingCart className='text-[1.4rem]' /></Badge></Link></li>
 
