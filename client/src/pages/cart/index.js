@@ -4,25 +4,35 @@ import React from 'react'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { list } from 'postcss';
 import { useRouter } from 'next/navigation'
 import { FiTrash } from 'react-icons/fi'
-import { removeFromCart } from '@/redux/reducerSlice/books';
-function index() {
+import { Button, message } from 'antd';
+import { IncreaseQuantity, removeFromCart, DecrementQuantity } from '@/redux/reducerSlice/books';
 
+function Cart() {
+  const [msg, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
   const { cartList } = useSelector(state => state.books)
   console.log(cartList)
   const removeCartItem = (item) => {
+    msg.info(item.bookName + " has been removed from the Cart");
     dispatch(removeFromCart(item._id))
+
+  }
+  const IncrementCartItem = (item) => {
+    dispatch(IncreaseQuantity(item))
+  }
+  const DecrementCartItem = (item) => {
+    dispatch(DecrementQuantity(item))
   }
   return (
     <>
+      {contextHolder}
       <Header />
       {cartList.length == 0 ? <EmptyCart /> : (
         <div className='con !mt-[70px] bg-white flex font-["poppins"]'>
           <div className='w-[800px]'>
-            <h2 className='text-[2.4rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart</h2>
+            <h2 className='text-[2.4rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart ({cartList.reduce((total, item) => total + item.quantity, 0)})</h2>
             {cartList.map(item =>
               <div>
                 <div className='flex'>
@@ -31,18 +41,24 @@ function index() {
                     <div>
                       <p className="ps-4 pt-3 text-xl">{item.bookName}</p>
                       <p className='ps-4 text-[16px]'>by <span className='text-gray-600'>{item.author}</span></p>
+                      <div className='mt-9 ms-4 w-[70px] h-[35px] bg-white shadow flex justify-around items-center px-1'>
+                        <button className='bg-transparent border-none text-3xl text-gray-600 cursor-pointer ' onClick={() => { DecrementCartItem(item) }}>-</button>
+                        <p className='inline text-lg '>{item.quantity}</p>
+                        <button className='bg-transparent border-none text-2xl  text-gray-600 cursor-pointer' onClick={() => { IncrementCartItem(item) }}>+</button>
+                      </div>
                     </div>
+
                     <div>
-                    <p className='pt-5 text-[1.4rem]'>Rs. {item.bookPrice}</p>
-                    <p className='mt-9 text-[1rem] items-center flex cursor-pointer' onClick={()=>{removeCartItem(item)}}><FiTrash/> Remove</p>
-                    <p>{item.quantity}</p>
+                      <p className='pt-5 text-[1.4rem]'>Rs. {item.bookPrice}</p>
+                      <p className='mt-[54px] text-[1rem] items-center flex cursor-pointer text-gray-600' onClick={() => { removeCartItem(item) }}><FiTrash /> Remove</p>
+
                     </div>
                   </div>
 
-                
-         
+
+
                 </div>
-                
+
                 <div className='w-[100%] bg-gray-400 h-[0.1px] my-5 '></div>
               </div>)}
 
@@ -52,7 +68,7 @@ function index() {
             <h3 className='text-left text-3xl font-normal py-3'>Cart Total</h3>
             <div className='flex !justify-between  '>
               <p>Subtotal</p>
-              <p>Rs. {cartList.reduce((total, item) => total + item.bookPrice, 0)}</p>
+              <p>Rs. {cartList.reduce((total, item) => total + item.totalBookPrice, 0)}</p>
             </div>
             <div className='w-[100%] bg-gray-600 h-[0.5px] my-3 mb-10'></div>
             <p>Shipping</p>
@@ -85,4 +101,4 @@ function EmptyCart() {
 
 
 
-export default index
+export default Cart
