@@ -4,11 +4,42 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import wishlistImg from '../../images/emptywishlist.png'
 import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux';
+import { BsCartCheck, BsBookmarkHeartFill } from 'react-icons/bs'
 function wishlist() {
+    const { wishlist } = useSelector(state => state.books)
     return (
         <>
             <Header />
-            <EmptyWishlist />
+            {wishlist.length == 0 ? <EmptyWishlist /> :
+                (<>
+                    <div className='con !mt-[70px] bg-white font-["poppins"]'>
+                        <h2 className='text-[2.1rem] font-normal text-[#2e2e2e] pb-10'>Your Wishlist ({wishlist.length})</h2>
+                        {
+                            wishlist.map(item => (
+                                <>
+                                    <div className='flex !justify-normal gap-4 mb-5 shadow p-3'>
+                                        <div>
+                                            <img src={'http://localhost:4000/books-img/' + item._id} alt="" width={142} height={202} priority={true} className="shadow-xl" />
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <h2 className='font-normal'>{item.bookName}</h2>
+                                                <p className='pb-10 text-sm'>{item.bookDescription.slice(0, 200)} ....</p>
+                                                <div className='flex !justify-normal'>
+                                                    <p className='me-5 items-baseline flex !justify-start gap-1 cursor-pointer'><BsCartCheck />Add to Cart</p>
+                                                    <p className='me-5 items-center flex !justify-start gap-1  cursor-pointer'><BsBookmarkHeartFill />Remove From Wishlist</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+
+                            ))
+                        }
+                    </div>
+                </>)}
             <Footer />
         </>
     )

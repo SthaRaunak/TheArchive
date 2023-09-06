@@ -38,7 +38,7 @@ function Cart() {
       {cartList.length == 0 ? <EmptyCart /> : (
         <div className='con !mt-[70px] bg-white flex font-["poppins"]'>
           <div className='w-[800px]'>
-            <h2 className='text-[2.4rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart ({cartList.reduce((total, item) => total + item.quantity, 0)})</h2>
+            <h2 className='text-[2.1rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart ({cartList.reduce((total, item) => total + item.quantity, 0)})</h2>
             {cartList.map(item =>
               <div>
                 <div className='flex'>
