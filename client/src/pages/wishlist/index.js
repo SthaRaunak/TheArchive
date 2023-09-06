@@ -6,8 +6,14 @@ import wishlistImg from '../../images/emptywishlist.png'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
 import { BsCartCheck, BsBookmarkHeartFill } from 'react-icons/bs'
+import { removeWishlist, addToCart } from '@/redux/reducerSlice/books';
 function wishlist() {
+    const dispatch = useDispatch();
     const { wishlist } = useSelector(state => state.books)
+    const handleMoveToCart = (item) => {
+        dispatch(addToCart(item))
+        dispatch(removeWishlist(item))
+    }
     return (
         <>
             <Header />
@@ -28,8 +34,8 @@ function wishlist() {
                                                 <h2 className='font-normal'>{item.bookName}</h2>
                                                 <p className='pb-10 text-sm'>{item.bookDescription.slice(0, 200)} ....</p>
                                                 <div className='flex !justify-normal'>
-                                                    <p className='me-5 items-baseline flex !justify-start gap-1 cursor-pointer'><BsCartCheck />Add to Cart</p>
-                                                    <p className='me-5 items-center flex !justify-start gap-1  cursor-pointer'><BsBookmarkHeartFill />Remove From Wishlist</p>
+                                                    <p className='me-5 items-baseline flex !justify-start gap-2 cursor-pointer text-gray-' onClick={() => handleMoveToCart(item)}><BsCartCheck />Move to Cart</p>
+                                                    <p className='me-5 items-center flex !justify-start gap-2  cursor-pointer' onClick={() => dispatch(removeWishlist(item))}><BsBookmarkHeartFill />Remove From Wishlist</p>
                                                 </div>
                                             </div>
                                         </div>
