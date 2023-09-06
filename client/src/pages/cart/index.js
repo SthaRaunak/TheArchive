@@ -29,7 +29,9 @@ function Cart() {
     dispatch(DecrementQuantity(item))
   }
   const addWishListItem = (item) => {
-    wishlist.some(list => list._id == item._id) ? dispatch(removeWishlist(item)) : dispatch(addToWishlist(item))
+    const { quantity, totalBookPrice, ...rest } = item;
+    console.log(rest)
+    wishlist.some(list => list._id == rest._id) ? dispatch(removeWishlist(rest)) : dispatch(addToWishlist(rest))
   }
   return (
     <>
