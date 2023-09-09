@@ -52,6 +52,11 @@ const booksSlice = createSlice({
         cartList: UpdatedCartState,
       }
     },
+    //Removing All Item From Cart
+    removeAllFromCart(state, action) {
+      state.cartList = [];
+      return state;
+    },
 
     //Increasing Book quantity
     IncreaseQuantity(state, actions) {
@@ -99,5 +104,5 @@ const booksSlice = createSlice({
 
 })
 
-export const { addToCart, removeFromCart, IncreaseQuantity, DecrementQuantity, addToWishlist, removeWishlist } = booksSlice.actions;
+export const { addToCart, removeFromCart, IncreaseQuantity, DecrementQuantity, addToWishlist, removeWishlist, removeAllFromCart } = booksSlice.actions;
 export default booksSlice.reducer;

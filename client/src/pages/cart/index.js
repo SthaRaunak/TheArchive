@@ -6,10 +6,11 @@ import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation'
 import { FiTrash } from 'react-icons/fi'
-import { BsBookmarkHeart, BsBookmarkHeartFill } from 'react-icons/bs'
+import { BsBookmarkHeart, BsBookmarkHeartFill, BsChevronLeft } from 'react-icons/bs'
+import { ImCross } from 'react-icons/im'
 import { Button, message } from 'antd';
-import { IncreaseQuantity, removeFromCart, DecrementQuantity, addToWishlist, removeWishlist } from '@/redux/reducerSlice/books';
-
+import { IncreaseQuantity, removeFromCart, DecrementQuantity, addToWishlist, removeWishlist, removeAllFromCart } from '@/redux/reducerSlice/books';
+import Link from 'next/link';
 function Cart() {
   const [msg, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function Cart() {
     console.log(rest)
     wishlist.some(list => list._id == rest._id) ? dispatch(removeWishlist(rest)) : dispatch(addToWishlist(rest))
   }
+
   return (
     <>
       {contextHolder}
@@ -40,7 +42,10 @@ function Cart() {
       {cartList.length == 0 ? <EmptyCart /> : (
         <div className='con !mt-[70px] bg-white flex font-["poppins"]'>
           <div className='w-[800px]'>
-            <h2 className='text-[2.1rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart ({cartList.reduce((total, item) => total + item.quantity, 0)})</h2>
+            <div className='flex justify-between items-baseline'>
+              <h2 className='text-[2.1rem] font-normal text-[#2e2e2e] pb-10'>Shopping Cart ({cartList.reduce((total, item) => total + item.quantity, 0)})</h2>
+              <p className='flex justify-normal items-center gap-2 font-semibold cursor-pointer' onClick={() => dispatch(removeAllFromCart())}> Clear Cart <ImCross className='text-sm' /></p>
+            </div>
             {cartList.map(item =>
               <div>
                 <div className='flex'>
@@ -75,7 +80,7 @@ function Cart() {
 
                 <div className='w-[100%] bg-gray-400 h-[0.1px] my-5 '></div>
               </div>)}
-
+            <Link href="/books" className='no-underline'><p className='flex items-center !justify-normal font-semibold cursor-pointer text-black'><BsChevronLeft className='text-xl' />Continue Shopping</p></Link>
           </div>
 
           <div className='w-[430px] h-[500px] shadow-xl px-5 mt-20'>
